@@ -1,0 +1,94 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-react-hooks",
+    "tslint-etc",
+    "tslint-import-group-ordering",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": ["node_modules"]
+  },
+  "rules": {
+    "ban-imports": [true, "allow-fast-null-checks"],
+    "import-group-ordering": {
+      "options": {
+        "imports-groups": [
+          {
+            "name": "dependencies"
+          },
+          {
+            "name": "project"
+          },
+          {
+            "name": "root"
+          },
+          {
+            "name": "other"
+          }
+        ],
+        "matching-rules": [
+          {
+            "disable-native-nodejs-modules": true,
+            "from-package.json": true,
+            "imports-group": "dependencies",
+            "type": "dependencies"
+          },
+          {
+            "imports-group": "project",
+            "matches": "^([a-z])",
+            "type": "project"
+          },
+          {
+            "imports-group": "root",
+            "matches": "^(~)",
+            "type": "project"
+          },
+          {
+            "imports-group": "other",
+            "matches": ".*",
+            "type": "project"
+          }
+        ]
+      }
+    },
+    "interface-name": [true, "never-prefix"],
+    "max-classes-per-file": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-assign-mutated-array": false,
+    "no-const-enum": true,
+    "no-enum": true,
+    "no-implicit-dependencies": [true, ["~", "types"]],
+    "no-missing-dollar-expect": true,
+    "no-submodule-imports": [true, "~", "types"],
+    "no-unsafe-callback-scope": false,
+    "no-unused-declaration": false,
+    "no-unused-expression": true,
+    "no-unused-variable": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "module-source-path": "full",
+        "named-imports-order": "case-insensitive"
+      }
+    ],
+    "prettier": [true, "./.prettierrc"],
+    "react-hooks-nesting": "error",
+    "throw-error": false,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    },
+    "radix": false
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"]
+}

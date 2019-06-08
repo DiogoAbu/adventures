@@ -1,0 +1,40 @@
+{
+  "name": "adventures",
+  "private": true,
+  "scripts": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn workspaces run test",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    "*.ts{,x}": [
+      "tslint  -c ./tslint.json --fix",
+      "prettier --write --config ./.prettierrc",
+      "git add"
+    ]
+  },
+  "workspaces": {
+    "packages": [
+      "mobile",
+      "server"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "prettier": "^1.17.1",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-etc": "^1.5.3",
+    "tslint-import-group-ordering": "^2.1.2",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.1.0"
+  }
+}

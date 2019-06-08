@@ -1,0 +1,22 @@
+# OSX
+#
+.DS_Store
+
+# Visual Studio Code
+#
+#.vscode/
+
+# node.js
+#
+dist/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# dotenv
+#
+.env
+
+# jest
+#
+coverage/
