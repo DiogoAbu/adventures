@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> matches its snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View>
+    <Text
+      style={
+        Object {
+          "fontSize": 36,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        }
+      }
+    >
+      Welcome to 
+      <Text
+        style={
+          Object {
+            "color": "#42B74F",
+            "fontSize": 36,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        ReactXP
+      </Text>
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "marginTop": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      To get started, edit /src/App.tsx
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginTop": 10,
+      }
+    }
+  >
+    <Link
+      style={
+        Object {
+          "color": "#0070E0",
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "textDecoration": "underline",
+        }
+      }
+      url="https://github.com/Microsoft/reactxp"
+    >
+      GitHub
+    </Link>
+    <Link
+      style={
+        Object {
+          "color": "#0070E0",
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "textDecoration": "underline",
+        }
+      }
+      url="https://microsoft.github.io/reactxp"
+    >
+      Docs
+    </Link>
+    <Link
+      style={
+        Object {
+          "color": "#0070E0",
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "textDecoration": "underline",
+        }
+      }
+      url="https://github.com/Microsoft/reactxp/tree/master/samples"
+    >
+      Samples
+    </Link>
+    <Link
+      style={
+        Object {
+          "color": "#0070E0",
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "textDecoration": "underline",
+        }
+      }
+      url="https://github.com/Microsoft/reactxp/tree/master/extensions"
+    >
+      Extensions
+    </Link>
+  </View>
+</View>
+`;

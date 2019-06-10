@@ -17,8 +17,8 @@
   },
   "workspaces": {
     "packages": [
-      "mobile",
-      "server"
+      "backend",
+      "frontend"
     ],
     "nohoist": [
       "**/react-native",
