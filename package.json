@@ -1,6 +1,8 @@
 {
   "name": "adventures",
+  "description": "Play a DnD Adventure with your friends anywhere",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {},
   "husky": {
     "hooks": {

@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "private": true,
   "main": "dist/",
-  "license": "MIT",
+  "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly src/",
     "test": "mocha --delay --require ts-node/register --require tests/helper/setup.ts tests/**/*.test.ts",

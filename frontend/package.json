@@ -1,8 +1,9 @@
 {
   "name": "frontend",
-  "private": true,
-  "main": "index.js",
   "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "rn-cli": "node scripts/react-native.js",
     "start:android": "yarn rn-cli run-android",
@@ -18,6 +19,13 @@
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check -w"
+  },
+  "dependencies": {
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "react-native": "0.57.8",
+    "react-native-windows": "0.57.1",
+    "reactxp": "1.6.1"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
@@ -49,12 +57,5 @@
     "webpack-cli": "3.3.3",
     "webpack-dev-server": "3.7.1",
     "webpack-merge": "4.2.1"
-  },
-  "dependencies": {
-    "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "react-native": "0.57.8",
-    "react-native-windows": "0.57.1",
-    "reactxp": "1.6.1"
   }
 }
