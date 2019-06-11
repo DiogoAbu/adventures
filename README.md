@@ -49,7 +49,7 @@ To fix a bug or enhancement, follow these steps:
 
 ### Bug / Feature Request
 
-Kindly open an issue [here](https://github.com/DiogoAbu/adventures/issues/new) name it and label it accordingly.
+Kindly open an issue [here](https://github.com/DiogoAbu/adventures/issues/new/choose) name it and label it accordingly.
 
 ## Built with
 
