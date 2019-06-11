@@ -1,7 +1,7 @@
 <h1 align="center">Adventures</h1>
 
 <div align="center">
-  <strong>Play a DnD Adventure with your friends anywhere</strong>
+  <strong>Play DnD Adventures with your friends anywhere</strong>
 </div>
 
 <div align="center">
