@@ -53,8 +53,8 @@ Kindly open an issue [here](https://github.com/DiogoAbu/adventures/issues/new) n
 
 ## Built with
 
-* [Apollo GraphQL](https://www.apollographql.com) - The backend
-* [ReactXP](https://microsoft.github.io/reactxp) - The frontend
+* [Apollo GraphQL](https://www.apollographql.com) - The [backend](backend)
+* [ReactXP](https://microsoft.github.io/reactxp) - The [frontend](frontend)
 
 ## License
 
