@@ -2,10 +2,12 @@ import bcrypt from 'bcrypt';
 import { ObjectId } from 'mongodb';
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
+  arrayProp as ArrayProp,
   instanceMethod,
   InstanceType,
   pre,
   prop as Prop,
+  Ref,
   Typegoose,
 } from 'typegoose';
 
@@ -40,6 +42,10 @@ export class User extends Typegoose {
 
   @Prop({ required: true, default: 'user', enum: roles })
   role: string;
+
+  @Field(() => User)
+  @ArrayProp({ itemsRef: User, default: [] })
+  chars: Array<Ref<User>>;
 
   @instanceMethod
   matchPassword(this: InstanceType<User>, plainPassword: string) {

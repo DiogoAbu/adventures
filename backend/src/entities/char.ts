@@ -152,6 +152,9 @@ export class Char extends Typegoose {
   @ArrayProp({ items: String, required: true, default: [] })
   languages: string[];
 
+  ///////////
+  // Other //
+  ///////////
   @Field(() => User)
   @Prop({ ref: User, required: true })
   user: Ref<User>;

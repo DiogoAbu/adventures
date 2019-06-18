@@ -17,16 +17,16 @@
 </div>
 
 ## Table of Contents <!-- omit in toc -->
-- [Overview](#overview)
-- [Development](#development)
-- [Built with](#built-with)
-- [License](#license)
+- [Overview](#Overview)
+- [Development](#Development)
+- [Built with](#Built-with)
+- [License](#License)
 
 ## Overview
 
 * **Character Creation.** Choose between a variety of faces, hair, clothes, and make your unique character.
 * **Play locally.** Play with your friends through Wi-Fi without the need of an active internet connection.
-* **Cross platform.** ReactXP runs on the Web, iOS, Android, and Windows.
+* **Cross platform.** App runs on the iOS, Android and Web.
 * **Synchronized experience.** Always resume where you left off no matter what device.
 * **5th Edition.** Play the 5th Edition Dungeons and Dragons.
 
@@ -54,7 +54,7 @@ Kindly open an issue [here](https://github.com/DiogoAbu/adventures/issues/new/ch
 ## Built with
 
 * [Apollo GraphQL](https://www.apollographql.com) - The [backend](backend)
-* [ReactXP](https://microsoft.github.io/reactxp) - The [frontend](frontend)
+* [Expo](https://expo.io/) - The [frontend](frontend)
 
 ## License
 

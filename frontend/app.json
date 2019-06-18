@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Adventures",
+    "version": "1.0.0",
+    "slug": "adventures",
+    "privacy": "public",
+    "sdkVersion": "33.0.0",
+    "platforms": ["ios", "android", "web"],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.adventures"
+    },
+    "ios": {
+      "bundleIdentifier": "com.adventures",
+      "supportsTablet": true
+    },
+    "packagerOpts": {
+      "config": "metro.config.js"
+    }
+  }
+}

@@ -3,7 +3,9 @@
   "description": "Play a DnD Adventure with your friends anywhere",
   "private": true,
   "license": "GPL-3.0-or-later",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "expo-yarn-workspaces postinstall"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged && yarn workspaces run test",
@@ -22,12 +24,10 @@
       "backend",
       "frontend"
     ],
-    "nohoist": [
-      "**/react-native",
-      "**/react-native/**"
-    ]
+    "nohoist": []
   },
   "devDependencies": {
+    "expo-yarn-workspaces": "^1.2.0",
     "husky": "^2.4.0",
     "lint-staged": "^8.2.0",
     "prettier": "^1.17.1",
@@ -37,6 +37,7 @@
     "tslint-import-group-ordering": "^2.1.2",
     "tslint-plugin-prettier": "^2.0.1",
     "tslint-react": "^4.0.0",
-    "tslint-react-hooks": "^2.1.0"
+    "tslint-react-hooks": "^2.1.0",
+    "typescript": "^3.5.1"
   }
 }

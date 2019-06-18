@@ -17,10 +17,16 @@
       "options": {
         "imports-groups": [
           {
+            "name": "react"
+          },
+          {
             "name": "dependencies"
           },
           {
             "name": "project"
+          },
+          {
+            "name": "at"
           },
           {
             "name": "root"
@@ -31,6 +37,11 @@
         ],
         "matching-rules": [
           {
+            "imports-group": "react",
+            "matches": "^react",
+            "type": "project"
+          },
+          {
             "disable-native-nodejs-modules": true,
             "from-package.json": true,
             "imports-group": "dependencies",
@@ -38,7 +49,7 @@
           },
           {
             "imports-group": "project",
-            "matches": "^([a-z])",
+            "matches": "^([a-z]|@)",
             "type": "project"
           },
           {
@@ -61,9 +72,9 @@
     "no-assign-mutated-array": false,
     "no-const-enum": true,
     "no-enum": true,
-    "no-implicit-dependencies": [true, ["~", "types"]],
+    "no-implicit-dependencies": [true, ["~", "@expo/vector-icons"]],
     "no-missing-dollar-expect": true,
-    "no-submodule-imports": [true, "~", "types"],
+    "no-submodule-imports": [true, "~"],
     "no-unsafe-callback-scope": false,
     "no-unused-declaration": false,
     "no-unused-expression": true,

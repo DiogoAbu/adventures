@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/",
+  "main": "dist",
   "private": true,
   "license": "GPL-3.0-or-later",
   "scripts": {
@@ -45,8 +45,7 @@
     "mocha": "^6.1.4",
     "mongodb-memory-server": "^5.1.3",
     "supertest": "^4.0.2",
-    "supports-color": "^6.1.0",
-    "ts-node-dev": "^1.0.0-pre.39",
-    "typescript": "^3.5.1"
+    "supports-color": "^7.0.0",
+    "ts-node-dev": "^1.0.0-pre.39"
   }
 }

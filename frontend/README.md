@@ -1,3 +1,3 @@
 # Frontend
 
-This uses [ReactXP](https://microsoft.github.io/reactxp) for creating cross-platform apps using React and React Native.
+This uses [Expo](https://expo.io/) for creating cross-platform apps using React Native and React Native Web.

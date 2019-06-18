@@ -1,86 +1,45 @@
-import React from 'react';
-import RX from 'reactxp';
+import React, { useState } from 'react';
 
-const _styles = {
-  main: RX.Styles.createViewStyle({
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  }),
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AppLoading } from 'expo';
 
-  title: RX.Styles.createTextStyle({
-    fontWeight: 'bold',
-    fontSize: 36,
-    textAlign: 'center',
-  }),
+import Campaigns from './screens/Campaigns';
+import SignIn from './screens/SignIn';
+import { cacheFonts, cacheImages } from './utils/cache';
+import { Route, Router, Switch } from './utils/router';
 
-  label: RX.Styles.createTextStyle({
-    marginTop: 10,
-    textAlign: 'center',
-    fontSize: 16,
-  }),
+function App() {
+  const [isReady, setIsReady] = useState(false);
 
-  name: RX.Styles.createTextStyle({
-    fontWeight: 'bold',
-    fontSize: 36,
-    color: '#42B74F',
-  }),
+  const cacheAssetsAsync = async () => {
+    const imageAssets = cacheImages([require('../assets/icon.png')]);
 
-  links: RX.Styles.createViewStyle({
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-  }),
+    const fontAssets = cacheFonts([MaterialCommunityIcons.font]);
 
-  link: RX.Styles.createLinkStyle({
-    textDecorationLine: 'underline',
-    paddingRight: 5,
-    paddingLeft: 5,
-    color: '#0070E0',
-  }),
-};
+    await Promise.all([...imageAssets, ...fontAssets]);
+  };
 
-export class App extends RX.Component {
-  public render() {
+  const onFinish = () => setIsReady(true);
+
+  if (!isReady) {
     return (
-      <RX.View style={_styles.main}>
-        <RX.View>
-          <RX.Text style={_styles.title}>
-            Welcome to <RX.Text style={_styles.name}>ReactXP</RX.Text>
-          </RX.Text>
-          <RX.Text style={_styles.label}>
-            To get started, edit /src/App.tsx
-          </RX.Text>
-        </RX.View>
-
-        <RX.View style={_styles.links}>
-          <RX.Link
-            url={'https://github.com/Microsoft/reactxp'}
-            style={_styles.link}
-          >
-            GitHub
-          </RX.Link>
-          <RX.Link
-            url={'https://microsoft.github.io/reactxp'}
-            style={_styles.link}
-          >
-            Docs
-          </RX.Link>
-          <RX.Link
-            url={'https://github.com/Microsoft/reactxp/tree/master/samples'}
-            style={_styles.link}
-          >
-            Samples
-          </RX.Link>
-          <RX.Link
-            url={'https://github.com/Microsoft/reactxp/tree/master/extensions'}
-            style={_styles.link}
-          >
-            Extensions
-          </RX.Link>
-        </RX.View>
-      </RX.View>
+      <AppLoading
+        startAsync={cacheAssetsAsync}
+        onFinish={onFinish}
+        // tslint:disable-next-line:no-console
+        onError={console.warn}
+      />
     );
   }
+
+  return (
+    <Router>
+      <Switch>
+        <Route exact={true} path="/" component={SignIn} />
+        <Route exact={true} path="/campaigns" component={Campaigns} />
+      </Switch>
+    </Router>
+  );
 }
+
+export default App;
