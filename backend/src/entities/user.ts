@@ -33,7 +33,7 @@ export class User extends Typegoose {
   password: string;
 
   @Field(() => String, { nullable: true })
-  @Prop({ unique: true })
+  @Prop({ unique: true, sparse: true })
   passwordResetToken: string | undefined;
 
   @Field(() => Date, { nullable: true })

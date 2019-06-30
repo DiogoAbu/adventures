@@ -8,9 +8,9 @@ const fakeUser = {
   password: '27sud72@7sdg72',
 };
 
-it('Should sign-up user', function() {
-  const query = `mutation signUp($data: SignUpInput!) {
-    signUp(data: $data)
+it('Should create an account', function() {
+  const query = `mutation createAnAccount($data: CreateAnAccountInput!) {
+    createAnAccount(data: $data)
   }`;
 
   const variables = {
@@ -28,13 +28,11 @@ it('Should sign-up user', function() {
       expect(res.status)
         .to.be.a('number')
         .that.equals(200);
-      expect(res.body.data.signUp)
-        .to.be.a('boolean')
-        .that.equals(true);
+      expect(res.body.data.createAnAccount).to.be.a('string');
     });
 });
 
-it('Should sign-in user', function() {
+it('Should sign user in', function() {
   const query = `mutation signIn($data: SignInInput!) {
     signIn(data: $data)
   }`;

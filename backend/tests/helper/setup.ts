@@ -22,8 +22,10 @@ import serverInit from '../../src/services/server';
   before(async function() {
     // Start server
     app = await serverInit();
+
     // Set url
     this.serverUrl = app.url;
+
     // Connect to mongoose
     await mongoose.connect(mongoUri, {
       autoIndex: false,

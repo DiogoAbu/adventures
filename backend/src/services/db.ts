@@ -1,7 +1,7 @@
 import Debug from 'debug';
 import mongoose from 'mongoose';
 
-const debug = Debug('app:db');
+const debug = Debug('backend:db');
 
 const defaultOptions = {
   useCreateIndex: true,

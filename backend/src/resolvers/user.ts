@@ -4,11 +4,12 @@ import { v4 as uuid } from 'uuid';
 import { User, UserModel } from '../entities/user';
 import {
   ChangePasswordInput,
+  CreateAnAccountInput,
   ForgotPasswordInput,
   SignInInput,
-  SignUpInput,
 } from '../inputs/user';
 import { toToken } from '../services/authentication';
+import mailer from '../services/mailer';
 import { MyContext } from '../types';
 
 const DAYS = parseInt(process.env.PASSWORD_RESET_EXPIRE_DAYS as string) || 1;
@@ -23,15 +24,20 @@ export class UserResolver {
     return filtered;
   }
 
-  @Mutation(() => Boolean)
-  async signUp(@Arg('data') { username, email, password }: SignUpInput) {
-    await UserModel.create({
+  @Mutation(() => String)
+  async createAnAccount(@Arg('data')
+  {
+    username,
+    email,
+    password,
+  }: CreateAnAccountInput) {
+    const user = await UserModel.create({
       username,
       email,
       password,
     });
 
-    return true;
+    return toToken(user);
   }
 
   @Mutation(() => String, { nullable: true })
@@ -72,6 +78,8 @@ export class UserResolver {
     user.passwordResetExpires = date;
 
     await user.save();
+
+    await mailer(email, resetToken);
 
     return true;
   }

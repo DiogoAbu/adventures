@@ -9,12 +9,13 @@ import { MyContext } from '../types';
 import { getUserFromHeader } from './authentication';
 import { authChecker } from './authorization';
 
-const debug = Debug('app:server');
+const debug = Debug('backend:server');
 
 export default async () => {
   const schema = await buildSchema({
     resolvers,
     authChecker,
+    emitSchemaFile: true,
   });
 
   // Create GraphQL server
