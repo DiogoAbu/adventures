@@ -1,27 +1,33 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Platform, ScrollView, TextInput, View } from 'react-native';
+import { ScrollView, TextInput, View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useDispatch } from 'react-redux';
 import { animated } from 'react-spring/native';
 
-import { Button, FloatingLabelInput, Header, NotifyLocal } from '../components';
-import { useSignInMutation } from '../generated/graphql';
+import { Button, FloatingLabelInput, Header } from '../components';
+import { useCreateAnAccountMutation } from '../generated/graphql';
 import { useInputValue, useKeyboard, useTypedSelector } from '../hooks';
 import { setToken } from '../reducers/auth';
-import { Redirect, RouteComponentProps } from '../utils/router';
+import { BackButton, Redirect, RouteComponentProps } from '../utils/router';
 import { focusNext } from '../utils/scrollToView';
 
 const AnimatedScrollView = animated(ScrollView);
 
-const SignIn: React.FC<RouteComponentProps & {}> = ({ history }) => {
+const CreateAnAccount: React.FC<RouteComponentProps & {}> = ({ history }) => {
   const scrollRef = useRef<ScrollView>(null);
+  const userRef = useRef<TextInput>(null);
   const passRef = useRef<TextInput>(null);
 
   // Form state
+  const email = useInputValue('');
   const user = useInputValue('');
   const pass = useInputValue('');
 
   // Shift input focus
+  const focusUser = useMemo(() => focusNext(userRef, scrollRef), [
+    userRef,
+    scrollRef,
+  ]);
   const focusPass = useMemo(() => focusNext(passRef, scrollRef), [
     passRef,
     scrollRef,
@@ -36,56 +42,64 @@ const SignIn: React.FC<RouteComponentProps & {}> = ({ history }) => {
   const dispatch = useDispatch();
 
   // Get mutation data and function
-  const [signInRes, signInRun] = useSignInMutation();
+  const [accountRes, accountRun] = useCreateAnAccountMutation();
 
   // Get any errors
+  // const emailError = useMemo(
+  //   () =>
+  //     accountRes.error &&
+  //     getValidationError({
+  //       error: accountRes.error,
+  //       prop: 'email',
+  //     }),
+  //   [accountRes.error],
+  // );
+
   // const userError = useMemo(
   //   () =>
-  //     signInRes.error &&
+  //     accountRes.error &&
   //     getValidationError({
-  //       error: signInRes.error,
+  //       error: accountRes.error,
   //       prop: 'username',
   //     }),
-  //   [signInRes.error],
+  //   [accountRes.error],
   // );
 
   // const passError = useMemo(
   //   () =>
-  //     signInRes.error &&
+  //     accountRes.error &&
   //     getValidationError({
-  //       error: signInRes.error,
+  //       error: accountRes.error,
   //       prop: 'password',
   //     }),
-  //   [signInRes.error],
+  //   [accountRes.error],
   // );
 
-  // Submit form
-  const onSignIn = useCallback(async () => {
+  const onCreateAnAccount = useCallback(async () => {
     try {
       // Run mutation
-      const res = await signInRun({
+      const res = await accountRun({
         data: {
+          email: email.value,
           username: user.value,
           password: pass.value,
         },
       });
-      // console.log(JSON.stringify(res.error, null, 2));
 
       // Check result
-      if (!res || !res.data || !res.data.signIn) {
+      if (!res || !res.data || !res.data.createAnAccount) {
         return;
       }
 
-      // Logged in successfully, store token
-      dispatch(setToken(res.data.signIn));
+      // Create account successfully, store token
+      dispatch(setToken(res.data.createAnAccount));
     } catch (error) {
       // ignore: Argument Validation Error
     }
   }, []);
 
-  // Redirect to register form
-  const onCreateAnAccount = useCallback(() => {
-    history.push('/create-an-account');
+  const onPressBack = useCallback(() => {
+    history.goBack();
   }, []);
 
   if (hasToken) {
@@ -93,25 +107,34 @@ const SignIn: React.FC<RouteComponentProps & {}> = ({ history }) => {
   }
 
   return (
-    <Header center='Sign In'>
+    <Header center='Create an account' leftOnPress={onPressBack}>
       {/*
       // @ts-ignore */}
       <AnimatedScrollView
         style={{ marginBottom: keyboardHeight }}
-        contentContainerStyle={[
-          styles.container,
-          Platform.OS === 'web' && styles.maxWidth,
-        ]}
+        contentContainerStyle={styles.container}
         keyboardDismissMode='on-drag'
         keyboardShouldPersistTaps='handled'
         ref={scrollRef}
       >
-        <View style={styles.containerInput}>
-          {signInRes.data && signInRes.data.signIn === null && (
-            <NotifyLocal text='No username/password matchs found' />
-          )}
+        <BackButton />
+
+        <View style={styles.content}>
+          <FloatingLabelInput
+            label='Email'
+            autoCapitalize='none'
+            autoCompleteType='email'
+            autoCorrect={false}
+            returnKeyType='next'
+            textContentType='emailAddress'
+            onSubmitEditing={focusUser}
+            blurOnSubmit={false}
+            // error={emailError}
+            {...email}
+          />
 
           <FloatingLabelInput
+            ref={userRef}
             label='Username'
             autoCapitalize='none'
             autoCompleteType='username'
@@ -133,24 +156,18 @@ const SignIn: React.FC<RouteComponentProps & {}> = ({ history }) => {
             returnKeyType='go'
             secureTextEntry={true}
             textContentType='password'
-            onSubmitEditing={onSignIn}
+            onSubmitEditing={onCreateAnAccount}
             blurOnSubmit={false}
             // error={passError}
             {...pass}
           />
 
           <Button
-            title='Sign in'
-            onPress={onSignIn}
-            disabled={signInRes.fetching}
+            title='Create an account'
+            onPress={onCreateAnAccount}
+            disabled={accountRes.fetching}
           />
         </View>
-
-        <Button
-          title='Create an account'
-          onPress={onCreateAnAccount}
-          brand='violet'
-        />
       </AnimatedScrollView>
     </Header>
   );
@@ -158,16 +175,11 @@ const SignIn: React.FC<RouteComponentProps & {}> = ({ history }) => {
 
 const styles = EStyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '$bgColor',
   },
 
-  maxWidth: {
-    maxWidth: 900,
-    alignSelf: 'center',
-  },
-
-  containerInput: {
+  content: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -175,4 +187,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default SignIn;
+export default CreateAnAccount;

@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';
+import { PersistGate } from 'redux-persist/integration/react';
+import { createClient, Provider as UrqlProvider } from 'urql';
 
-import Campaigns from './screens/Campaigns';
-import SignIn from './screens/SignIn';
-import { cacheFonts, cacheImages } from './utils/cache';
+import { Loading, PrivateRoute } from './components';
+import { Campaigns, CreateAnAccount, SignIn } from './screens';
+import createStore from './store';
+import { dark, light } from './theme';
+import { cacheFonts, cacheImages } from './utils/cacheAssets';
 import { Route, Router, Switch } from './utils/router';
 
-function App() {
+const client = createClient({
+  url: 'http://192.168.2.100:4000',
+});
+
+const App: React.FC = () => {
+  const { persistor, store } = createStore();
+
   const [isReady, setIsReady] = useState(false);
 
-  const cacheAssetsAsync = async () => {
-    const imageAssets = cacheImages([require('../assets/icon.png')]);
+  const init = async () => {
+    // Get persisted theme
+    const { theme } = store.getState();
 
-    const fontAssets = cacheFonts([MaterialCommunityIcons.font]);
+    await EStyleSheet.build(theme === 'light' ? light : dark);
 
-    await Promise.all([...imageAssets, ...fontAssets]);
+    await Promise.all([
+      ...cacheImages([require('../assets/icon.png')]),
+      ...cacheFonts([MaterialCommunityIcons.font]),
+    ]);
   };
 
   const onFinish = () => setIsReady(true);
@@ -24,7 +40,7 @@ function App() {
   if (!isReady) {
     return (
       <AppLoading
-        startAsync={cacheAssetsAsync}
+        startAsync={init}
         onFinish={onFinish}
         // tslint:disable-next-line:no-console
         onError={console.warn}
@@ -33,13 +49,29 @@ function App() {
   }
 
   return (
-    <Router>
-      <Switch>
-        <Route exact={true} path="/" component={SignIn} />
-        <Route exact={true} path="/campaigns" component={Campaigns} />
-      </Switch>
-    </Router>
+    <UrqlProvider value={client}>
+      <ReduxProvider store={store}>
+        <PersistGate persistor={persistor} loading={<Loading />}>
+          <Router>
+            <Switch>
+              <Route exact={true} path='/' component={SignIn} />
+              <Route
+                exact={true}
+                path='/create-an-account'
+                component={CreateAnAccount}
+              />
+
+              <PrivateRoute
+                exact={true}
+                path='/campaigns'
+                component={Campaigns}
+              />
+            </Switch>
+          </Router>
+        </PersistGate>
+      </ReduxProvider>
+    </UrqlProvider>
   );
-}
+};
 
 export default App;

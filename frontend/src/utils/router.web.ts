@@ -1,6 +1,7 @@
 export {
   BrowserRouter as Router,
   Link,
+  Redirect,
   Route,
   Switch,
   withRouter,

@@ -1,8 +1,11 @@
 export {
-  NativeRouter as Router,
+  BackButton,
   Link,
+  NativeRouter as Router,
+  Redirect,
   Route,
+  RouteComponentProps,
+  RouteProps,
   Switch,
   withRouter,
-  BackButton,
 } from 'react-router-native';

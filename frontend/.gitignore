@@ -1,6 +1,12 @@
+# node.js
+#
 node_modules/**/*
-.expo/*
 npm-debug.*
+yarn-error.*
+
+# expo
+#
+.expo/*
 *.jks
 *.p12
 *.key
@@ -8,3 +14,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+
+# jest
+#
+coverage/
