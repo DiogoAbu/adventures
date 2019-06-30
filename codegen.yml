@@ -1,0 +1,12 @@
+overwrite: true
+schema: 'backend/schema.gql'
+documents: 'frontend/schema.gql'
+generates:
+  frontend/src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-urql'
+    config:
+      withComponent: false
+      withHooks: true

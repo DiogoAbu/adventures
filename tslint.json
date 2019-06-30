@@ -70,11 +70,13 @@
     "member-access": false,
     "member-ordering": false,
     "no-assign-mutated-array": false,
+    "no-async-without-await": true,
     "no-const-enum": true,
     "no-enum": true,
-    "no-implicit-dependencies": [true, ["~", "@expo/vector-icons"]],
+    "no-empty-interface": false,
+    "no-implicit-dependencies": [true, "dev", ["~", "@expo/vector-icons"]],
     "no-missing-dollar-expect": true,
-    "no-submodule-imports": [true, "~"],
+    "no-submodule-imports": [true, "~", "react-spring", "redux-persist"],
     "no-unsafe-callback-scope": false,
     "no-unused-declaration": false,
     "no-unused-expression": true,
@@ -88,7 +90,8 @@
         "named-imports-order": "case-insensitive"
       }
     ],
-    "prettier": [true, "./.prettierrc"],
+    "prettier": [true, "./.prettierrc.js"],
+    "radix": false,
     "react-hooks-nesting": "error",
     "throw-error": false,
     "variable-name": {
@@ -98,8 +101,7 @@
         "allow-leading-underscore",
         "allow-pascal-case"
       ]
-    },
-    "radix": false
+    }
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

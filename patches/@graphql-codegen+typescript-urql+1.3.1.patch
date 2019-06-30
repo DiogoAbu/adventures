@@ -1,0 +1,19 @@
+diff --git a/node_modules/@graphql-codegen/typescript-urql/dist/commonjs/visitor.js b/node_modules/@graphql-codegen/typescript-urql/dist/commonjs/visitor.js
+index dc89165..4f3fefe 100644
+--- a/node_modules/@graphql-codegen/typescript-urql/dist/commonjs/visitor.js
++++ b/node_modules/@graphql-codegen/typescript-urql/dist/commonjs/visitor.js
+@@ -43,12 +43,12 @@ export const ${componentName} = (props: Omit<Urql.${operationType}Props, 'query'
+         if (operationType === 'Mutation') {
+             return `
+ export function use${operationName}() {
+-  return Urql.use${operationType}<${operationResultType}>(${documentVariableName});
++  return Urql.use${operationType}<${operationResultType}, ${operationVariablesTypes}>(${documentVariableName});
+ };`;
+         }
+         return `
+ export function use${operationName}(options: Omit<Urql.Use${operationType}Args<${operationVariablesTypes}>, 'query'> = {}) {
+-  return Urql.use${operationType}<${operationResultType}>({ query: ${documentVariableName}, ...options });
++  return Urql.use${operationType}<${operationResultType}, ${operationVariablesTypes}>({ query: ${documentVariableName}, ...options });
+ };`;
+     }
+     buildOperation(node, documentVariableName, operationType, operationResultType, operationVariablesTypes) {

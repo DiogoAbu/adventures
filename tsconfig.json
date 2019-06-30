@@ -8,6 +8,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
     "strictFunctionTypes": true,
     "strictNullChecks": true
   }
