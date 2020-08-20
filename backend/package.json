@@ -27,7 +27,7 @@
     "@types/uuid": "^3.4.4",
     "accesscontrol": "^2.2.1",
     "apollo-server": "^2.6.1",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "class-validator": "^0.9.1",
     "debug": "^4.1.1",
     "graphql": "~14.2.1",
